@@ -1,0 +1,3 @@
+# localLibrary
+
+A site to replicate library behavior such as looking at books, authors, genres, etc...
