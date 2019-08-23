@@ -60,7 +60,7 @@ exports.genre_create_post = [
 		);
 
 		if(!errors.isEmpty()) {
-			res.render('genre_form', {title: 'Create Genre', genre: genre, errors: errors.array()};
+			res.render('genre_form', {title: 'Create Genre', genre: genre, errors: errors.array()});
 				return;
 		}
 		else {
