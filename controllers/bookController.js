@@ -90,10 +90,12 @@ exports.book_create_post = [
     // Convert the genre to an array.
     (req, res, next) => {
         if(!(req.body.genre instanceof Array)){
-            if(typeof req.body.genre==='undefined')
-            req.body.genre=[];
-            else
-            req.body.genre=new Array(req.body.genre);
+            if(typeof req.body.genre === 'undefined') {
+            	req.body.genre=[];
+	    }
+            else {
+            	req.body.genre=new Array(req.body.genre);
+	    }
         }
         next();
     },
@@ -103,9 +105,14 @@ exports.book_create_post = [
     validator.body('author', 'Author must not be empty.').isLength({ min: 1 }).trim(),
     validator.body('summary', 'Summary must not be empty.').isLength({ min: 1 }).trim(),
     validator.body('isbn', 'ISBN must not be empty').isLength({ min: 1 }).trim(),
+    validator.body('genre', 'Genre must be an array').isArray(),
   
     // Sanitize fields (using wildcard).
-    validator.sanitizeBody('*').escape(),
+    validator.sanitizeBody('genre.*').escape(),
+    validator.sanitizeBody('title').escape(),
+    validator.sanitizeBody('author').escape(),
+    validator.sanitizeBody('summary').escape(),
+    validator.sanitizeBody('isbn').escape(),
 
     // Process request after validation and sanitization.
     (req, res, next) => {
