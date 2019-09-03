@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var config = require('./config/config');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -11,7 +12,8 @@ var catalogRouter = require('./routes/catalog');
 var app = express();
 
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://philipp:Berbatov9@cluster0-bnnfb.gcp.mongodb.net/local_library?retryWrites=true&w=majority';
+var mongoDB = config.mongoUrl; 
+
 mongoose.connect(mongoDB, {useNewUrlParser: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
