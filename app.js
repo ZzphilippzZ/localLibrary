@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var config = require('./config/config');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -14,7 +13,7 @@ var helmet = require('helmet');
 var app = express();
 
 var mongoose = require('mongoose');
-var mongoDB = config.mongoUrl; 
+var mongoDB = process.env.MONGODB_URI; 
 
 mongoose.connect(mongoDB, {useNewUrlParser: true});
 var db = mongoose.connection;
